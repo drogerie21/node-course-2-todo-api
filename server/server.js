@@ -33,7 +33,6 @@ app.get('/todos', (req, res) => {
 
 app.get('/todos/:id', (req,res) => {
   let id = req.params.id;
-  console.log(id);
   if (!ObjectID.isValid(id)) {
     res.status(404).send('No valid Object id');
   }
@@ -43,7 +42,7 @@ app.get('/todos/:id', (req,res) => {
       res.status(404).send({error: 'No Todo found'});
     }
 
-    res.status(200).send(todo);
+    res.status(200).send({todo});
   }).catch(e => {
     res.status(400).send();
   });
