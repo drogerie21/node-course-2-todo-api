@@ -8,6 +8,7 @@ cd /usr/local/Cellar/mongodb/4.0.2/bin
 
 **Start database server:**
 ./mongod --dbpath ~/mongo-data
+/usr/local/Cellar/mongodb/4.0.2/bin/mongod --dbpath ~/mongo-data
 
 **mongodb node api:**
 https://mongodb.github.io/node-mongodb-native/2.2/api/index.html
