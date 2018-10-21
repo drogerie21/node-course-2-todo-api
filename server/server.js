@@ -1,22 +1,38 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
 var { mongoose } = require('./db/mongoose');
-var { Todo } = require ('./models/todo');
+var { Todo } = require('./models/todo');
 var { User } = require('./models/user');
 
 
-// var newTodo = new Todo({
-//   text: 'Do something',
-// });
-// newTodo.save().then((doc)=> {
-//   console.log(doc)
-// }, err => {
-//   console.error('Unable to save todo');
-//   console.error(err);
-// });
+var app = express();
 
+app.use(bodyParser.json());
 
-var newUser = new User({
-  email: 'f_up@drogerie21.at',
+app.post('/todos', (req, res) => {
+    var todo = new Todo({
+        text: req.body.text
+    })
+
+    todo.save().then(doc => {
+        res.send(doc);
+    }, e => {
+        res.status(400).send(e);
+    });
 });
-newUser.save().then(doc => {
-  console.log(doc);
+
+app.get('/todos', (req, res) => {
+    Todo.find().then((todos)=> {
+        res.send({todos}); // sending an es6 object
+    }, e => {
+        res.status.send(e);
+    });
 });
+
+app.listen(3000, () => {
+    console.log('Started on port 3000');
+});
+
+module.exports = {app};
+
