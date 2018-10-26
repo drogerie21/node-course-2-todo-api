@@ -55,12 +55,12 @@ app.delete('/todos/:id', (req,res) => {
     res.status(404).send('No valid Object id');
   }
 
-  Todo.findOneAndDelete({_id: new ObjectID(id)}).then((deletedTodo) => {
-    if (!deletedTodo) {
+  Todo.findOneAndDelete({_id: new ObjectID(id)}).then((todo) => {
+    if (!todo) {
       res.status(404).send({error: 'Todo to delete not found'});
     }
 
-    res.status(200).send(deletedTodo);
+    res.status(200).send({todo});
 
   }).catch(e => {
     res.status(400).send();
