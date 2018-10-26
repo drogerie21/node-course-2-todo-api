@@ -54,6 +54,7 @@ app.delete('/todos/:id', (req,res) => {
   let id = req.params.id;
   if (!ObjectID.isValid(id)) {
     res.status(404).send('No valid Object id');
+    return;
   }
 
   Todo.findOneAndDelete({_id: new ObjectID(id)}).then((todo) => {
